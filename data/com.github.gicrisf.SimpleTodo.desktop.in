@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=simpletodo
+Exec=simpletodo
+Icon=com.github.gicrisf.SimpleTodo
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

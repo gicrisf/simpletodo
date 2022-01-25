@@ -1,0 +1,4 @@
+data/com.github.gicrisf.SimpleTodo.desktop.in
+data/com.github.gicrisf.SimpleTodo.appdata.xml.in
+data/com.github.gicrisf.SimpleTodo.gschema.xml
+src/window.ui
