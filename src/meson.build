@@ -32,7 +32,12 @@ rust_sources = files(
   'application.rs',
   'config.rs',
   'main.rs',
-  'window.rs',
+  'window/imp.rs',
+  'window/mod.rs',
+  'todo_row/imp.rs',
+  'todo_row/mod.rs',
+  'todo_object/imp.rs',
+  'todo_object/mod.rs',
 )
 
 sources = [cargo_sources, rust_sources]

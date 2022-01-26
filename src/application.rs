@@ -84,7 +84,7 @@ impl SimpletodoApplication {
             .modal(true)
             .program_name("simpletodo")
             .version(VERSION)
-            .authors(vec!["mr-chrome".into()])
+            .authors(vec!["gicrisf".into()])
             .build();
 
         dialog.present();
