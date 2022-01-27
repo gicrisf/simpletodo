@@ -7,6 +7,7 @@ use gtk::subclass::prelude::*;
 use gtk::{glib, pango};
 use pango::{AttrInt, AttrList};
 
+// Create a wrapper around the Object
 glib::wrapper! {
     pub struct TodoRow(ObjectSubclass<imp::TodoRow>)
     @extends gtk::Box, gtk::Widget,
@@ -19,6 +20,7 @@ impl Default for TodoRow {
     }  // default ()
 }
 
+// Implement the appropriate traits
 impl TodoRow {
     pub fn new() -> Self {
         Object::new(&[]).expect("Failed to create `TodoRow`")
@@ -26,8 +28,8 @@ impl TodoRow {
 
     pub fn bind(&self, todo_object: &TodoObject) {
         // Get state
-        // let imp = self.imp();
-        let imp = imp::TodoRow::from_instance(self);
+        // let imp = imp::TodoRow::from_instance(self);
+        let imp = self.imp();
         let completed_button = imp.completed_button.get();
         let content_label = imp.content_label.get();
         let mut bindings = imp.bindings.borrow_mut();
@@ -71,8 +73,8 @@ impl TodoRow {
 
     pub fn unbind(&self) {
         // Get state
-        // let imp = self.imp();
-        let imp = imp::TodoRow::from_instance(self);
+        // let imp = imp::TodoRow::from_instance(self);
+        let imp = self.imp();
 
         // Unbind all stored bindings
         for binding in imp.bindings.borrow_mut().drain(..) {

@@ -2,12 +2,13 @@ mod imp;
 
 use crate::todo_object::TodoObject;
 use crate::todo_row::TodoRow;
-use glib::{clone, Object};
+use glib::clone;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gio, glib};
-use gtk::{Application, NoSelection, SignalListItemFactory};
+use gtk::{NoSelection, SignalListItemFactory};
 
+// Create a wrapper around the Object
 glib::wrapper! {
     pub struct SimpletodoWindow(ObjectSubclass<imp::SimpletodoWindow>)
         @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow,
@@ -15,6 +16,7 @@ glib::wrapper! {
         gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
 
+// Implement the appropriate traits
 impl SimpletodoWindow {
     pub fn new<P: glib::IsA<gtk::Application>>(application: &P) -> Self {
         // Create new window
@@ -23,9 +25,9 @@ impl SimpletodoWindow {
     }
 
     fn model(&self) -> &gio::ListStore {
-        // Get state
-        // let imp = self.imp();
-        let imp = imp::SimpletodoWindow::from_instance(self);
+        // Get state and return model
+        // let imp = imp::SimpletodoWindow::from_instance(self);
+        let imp = self.imp();
         imp.model.get().expect("Could not get model")
     }  // model
 
@@ -33,9 +35,9 @@ impl SimpletodoWindow {
         // Create new model
         let model = gio::ListStore::new(TodoObject::static_type());
 
-        // Get state and set model
-        // let imp = self.imp();
-        let imp = imp::SimpletodoWindow::from_instance(self);
+        // Get state
+        // let imp = imp::SimpletodoWindow::from_instance(self);
+        let imp = self.imp();
         imp.model.set(model).expect("Could not set model");
 
         // Wrap model with selection and pass it to the list view
@@ -45,8 +47,8 @@ impl SimpletodoWindow {
 
     fn setup_callbacks(&self) {
         // Get state
-        // let imp = self.imp();
-        let imp = imp::SimpletodoWindow::from_instance(self);
+        // let imp = imp::SimpletodoWindow::from_instance(self);
+        let imp = self.imp();
         let model = self.model();
 
         // Setup callback so that activation
@@ -104,8 +106,8 @@ impl SimpletodoWindow {
         });
 
         // Set the factory of the list view
-        // let imp = self.imp();
-        let imp = imp::SimpletodoWindow::from_instance(self);
+        // let imp = imp::SimpletodoWindow::from_instance(self);
+        let imp = self.imp();
         imp.list_view.set_factory(Some(&factory));
     }  // setup_factory
 }
