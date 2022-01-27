@@ -79,7 +79,7 @@ impl SimpletodoApplication {
 
     fn show_about(&self) {
         let window = self.active_window().unwrap();
-        let dialog = gtk::AboutDialogBuilder::new()
+        let dialog = gtk::builders::AboutDialogBuilder::new()
             .transient_for(&window)
             .modal(true)
             .program_name("simpletodo")

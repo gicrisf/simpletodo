@@ -20,4 +20,64 @@ pub struct TodoObject {
 impl ObjectSubclass for TodoObject {
     const NAME: &'static str = "TodoObject";
     type Type = super::TodoObject;
+    type ParentType = glib::Object;  // mmm
+}
+
+// Trait shared by all GObjects
+impl ObjectImpl for TodoObject {
+    fn properties() -> &'static [ParamSpec] {
+        static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
+            vec![
+                ParamSpecBoolean::new(
+                    // Name
+                    "completed",
+                    // Nickname
+                    "completed",
+                    // Short description
+                    "completed",
+                    // Default value
+                    false,
+                    // The property can be read and written to
+                    ParamFlags::READWRITE,
+                ),
+                ParamSpecString::new(
+                    // Name
+                    "content",
+                    // Nickname
+                    "content",
+                    // Short description
+                    "content",
+                    // Default value
+                    None,
+                    // The property can be read and written to
+                    ParamFlags::READWRITE,
+                ),
+            ]
+        });
+        PROPERTIES.as_ref()
+    }
+
+    fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        match pspec.name() {
+            "completed" => {
+                let input_value = value.get().expect("The value needs to be of type `bool`.");
+                self.data.borrow_mut().completed = input_value;
+            }
+            "content" => {
+                let input_value = value
+                    .get()
+                    .expect("The value needs to be of type `String`.");
+                self.data.borrow_mut().content = input_value;
+            }
+            _ => unimplemented!(),
+        }
+    }  // set_property
+
+    fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        match pspec.name() {
+            "completed" => self.data.borrow().completed.to_value(),
+            "content" => self.data.borrow().content.to_value(),
+            _ => unimplemented!(),
+        }
+    }  // property
 }

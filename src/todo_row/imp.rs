@@ -6,7 +6,7 @@ use std::cell::RefCell;
 
 // Object holding the state
 #[derive(Default, CompositeTemplate)]
-#[template(resource = "com/github/gicrisf/SimpleTodo/todo_row/todo_row.ui")]
+#[template(resource = "/com/github/gicrisf/SimpleTodo/todo_row/todo_row.ui")]
 pub struct TodoRow {
     #[template_child]
     pub completed_button: TemplateChild<CheckButton>,
@@ -17,8 +17,8 @@ pub struct TodoRow {
 }
 
 // The central trait for subclassing a GObject
-#[glib::content_subclass]
-impl ObjectSublass for TodoRow {
+#[glib::object_subclass]
+impl ObjectSubclass for TodoRow {
     // `NAME` needs to match `class` attribute of template
     const NAME: &'static str = "TodoRow";
     type Type = super::TodoRow;

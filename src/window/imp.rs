@@ -38,7 +38,19 @@ impl ObjectSubclass for SimpletodoWindow {
 }
 
 // Trait shared by all GObject
-impl ObjectImpl for SimpletodoWindow {}
+impl ObjectImpl for SimpletodoWindow {
+    // &Self::Type = SimpletodoWindow
+    fn constructed(&self, obj: &Self::Type) {
+        // Call "constructed" on parent
+        // AKA we build this window when the parent is constructed
+        self.parent_constructed(obj);
+
+        // Setup
+        obj.setup_model();
+        obj.setup_callbacks();
+        obj.setup_factory();
+    }  // constructed
+}
 
 // Trait shared by all widgets
 impl WidgetImpl for SimpletodoWindow {}

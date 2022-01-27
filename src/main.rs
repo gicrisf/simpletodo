@@ -1,6 +1,8 @@
 mod application;
 mod config;
 mod window;
+mod todo_object;
+mod todo_row;
 
 use self::application::SimpletodoApplication;
 use self::window::SimpletodoWindow;
