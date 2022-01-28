@@ -10,9 +10,6 @@ pub struct SimpletodoWindow {
     // Template widgets
     #[template_child]
     pub header_bar: TemplateChild<gtk::HeaderBar>,
-    // Hello world label
-    #[template_child]
-    pub label: TemplateChild<gtk::Label>,
     // We store references to the entry
     #[template_child]
     pub entry: TemplateChild<Entry>,
